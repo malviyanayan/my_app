@@ -1,10 +1,27 @@
-import { FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { FaSignOutAlt, FaTimes, FaComments, FaUsers, FaBox, FaCog, FaUser } from "react-icons/fa";
 import "./Sidebar.css";
 
 const Sidebar = ({ role, menuItems, activeTab, setActiveTab, isSidebarOpen, setIsSidebarOpen }) => {
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/";
+  };
+
+  const getMenuIcon = (item) => {
+    switch (item) {
+      case "All Users":
+        return <FaUsers />;
+      case "Chat Support":
+        return <FaComments />;
+      case "Products":
+        return <FaBox />;
+      case "Settings":
+        return <FaCog />;
+      case "Profile":
+        return <FaUser />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -31,7 +48,8 @@ const Sidebar = ({ role, menuItems, activeTab, setActiveTab, isSidebarOpen, setI
               onClick={() => setActiveTab(item)}
               className={`sidebar-item ${isActive ? "active" : ""}`}
             >
-              {item}
+              <span className="sidebar-item-icon">{getMenuIcon(item)}</span>
+              <span className="sidebar-item-text">{item}</span>
             </button>
           );
         })}

@@ -6,6 +6,7 @@ import AllUsers from "./dashboard/AllUsers";
 import Profile from "./dashboard/Profile";
 import Settings from "./dashboard/Settings";
 import Products from "./dashboard/Products";
+import ChatSupport from "./dashboard/ChatSupport";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -18,8 +19,8 @@ const Dashboard = () => {
     if (!role) navigate("/auth");
   }, [role, navigate]);
 
-  const userMenu = ["Profile", "Settings"];
-  const adminMenu = ["All Users", "Products", "Settings"];
+  const userMenu = ["Profile", "Settings", "Chat Support"];
+  const adminMenu = ["All Users", "Chat Support", "Products", "Settings"];
 
   const menuItems = role === "admin" ? adminMenu : userMenu;
 
@@ -39,6 +40,8 @@ const Dashboard = () => {
         return <Profile role={role} />;
       case "Settings":
         return <Settings />;
+      case "Chat Support":
+        return <ChatSupport role={role} />;
       default:
         return <h2>Welcome</h2>;
     }
